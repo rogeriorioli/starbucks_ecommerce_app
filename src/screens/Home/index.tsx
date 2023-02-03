@@ -1,16 +1,27 @@
-import { Text, View, StyleSheet, ScrollView, Button, TouchableOpacity, GestureResponderEvent, Image } from "react-native";
+import { Text, View, StyleSheet, ScrollView, Button, TouchableOpacity, GestureResponderEvent, Image, FlatList, Alert } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 
 import Header from "../../components/Header";
 import ProductCard from "../../components/ProductCard";
+import { products } from "../../api/api";
+import { useState } from "react";
 
 export default function Home({ navigation: { navigate } }: any) {
     const navigation = useNavigation()
+    const [whishProcuct, setWishProduct] = useState<boolean>(false)
+    const toggleWishProduct = (id : number ) =>  {
+        setWishProduct(!whishProcuct)
+       
+    }
+
+    const getItem = (item : string) => {
+        Alert.alert(item)
+    } 
     return (
         <>
         <View style={styles.wrapper}>
             <View style={styles.container}>
-                <Header greatins="BOM DIA !" name="Carlos R Orioli" />
+                <Header greatins="BOM DIA !" name="Carlos R Orioli"  />
                 <ScrollView style={styles.scroll} horizontal showsHorizontalScrollIndicator={false}>
                     <View style={styles.menu}>
                         <TouchableOpacity onPress={() => navigate('Home')}>
@@ -28,38 +39,70 @@ export default function Home({ navigation: { navigate } }: any) {
         </View>
                 <ScrollView style={styles.scrollWrapper} >
                 
-                    <ScrollView style={styles.scrollShelf} horizontal showsHorizontalScrollIndicator={false}>
-
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                    </ScrollView>
+                <FlatList 
+                            style={styles.scrollShelf} 
+                            keyExtractor={(item) => item.id.toString()}
+                            data={products}
+                            renderItem={({item}) => ( <ProductCard
+                            onPress={() => navigate("ProductSingle", {item})}
+                            whislist={item.whishlist}
+                                addToWhislist={() => toggleWishProduct(item.id)} 
+                                id={item.id} name={item.name} price={item.price} images={item.images[1]}/>) }
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            contentContainerStyle={{paddingRight: 30}}
+                            />
         
 
-                    <View>
+                    <View style={styles.container}> 
                         <Text style={styles.title}>Melhores Ofertas</Text>
                     </View>
-                    <ScrollView style={styles.scrollShelf} horizontal showsHorizontalScrollIndicator={false}>
-
+                    <FlatList 
+                            style={styles.scrollShelf} 
+                            keyExtractor={(item) => item.id.toString()}
+                            data={products}
+                            renderItem={({item}) => ( <ProductCard
+                                whislist={item.whishlist}
+                                addToWhislist={() => toggleWishProduct(item.id)} 
+                                id={item.id} name={item.name} price={item.price} images={item.images[1]}/>) }
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            contentContainerStyle={{paddingRight: 30}}
+                            />
         
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                    </ScrollView>
-                    <View>
-                        <Text style={styles.title}>Melhores Ofertas</Text>
+                
+                    
+                     <View style={styles.container}> 
+                        <Text style={styles.title}>Cafés em destaque</Text>
                     </View>
-                    <ScrollView style={styles.scrollShelf} horizontal showsHorizontalScrollIndicator={false}>
-
+                    <FlatList 
+                            style={styles.scrollShelf} 
+                            keyExtractor={(item) => item.id.toString()}
+                            data={products}
+                            renderItem={({item}) => ( <ProductCard
+                                whislist={item.whishlist}
+                                addToWhislist={() => toggleWishProduct(item.id)} 
+                                id={item.id} name={item.name} price={item.price} images={item.images[1]}/>) }
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            contentContainerStyle={{paddingRight: 30}}
+                            />
         
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-
-                    </ScrollView>
+                                   <View style={styles.container}> 
+                        <Text style={styles.title}>Smoothies Refrescantes</Text>
+                    </View>
+                    <FlatList 
+                            style={styles.scrollShelf} 
+                            keyExtractor={(item) => item.id.toString()}
+                            data={products}
+                            renderItem={({item}) => ( <ProductCard
+                                whislist={item.whishlist}
+                                addToWhislist={() => toggleWishProduct(item.id)} 
+                                id={item.id} name={item.name} price={item.price} images={item.images[1]}/>) }
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            contentContainerStyle={{paddingRight: 30}}
+                            />
         <View style={styles.clear}></View>
                 </ScrollView>
 
@@ -88,7 +131,6 @@ const styles = StyleSheet.create({
         flexGrow: 0
     },
     scrollWrapper : {
-        paddingLeft : 40,
         flexGrow: 0
     },
     scrollShelf: {

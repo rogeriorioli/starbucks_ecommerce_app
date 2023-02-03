@@ -3,12 +3,19 @@ import { View, Text, StyleSheet } from "react-native";
 type HeaderProps = {
     greatins : string
     name : string
+    showBackButton? : boolean
 }
 
-export default function Header ({greatins, name} : HeaderProps) {
+export default function Header ({greatins, name, showBackButton = false} : HeaderProps) {
     return(
         <>
-        <View>
+        <View style={styles.content}>
+            {
+                showBackButton &&
+                <View>
+                    <Text > {'<'} </Text>
+                </View>
+            }
             <Text style={styles.greting}>{greatins}</Text>
             <Text style={styles.name}>{name}</Text>
         </View>
@@ -17,6 +24,9 @@ export default function Header ({greatins, name} : HeaderProps) {
 }
 
 const styles = StyleSheet.create({
+    content : {
+        paddingVertical : 20
+    },
     greting : {
         color : "#CACACA",
         fontSize: 18,

@@ -1,10 +1,11 @@
 export const products = [
     {
         "id" : 1,
-        "name" : " Café Latte",
+        "name" : "Fraputchino Chokko Chip",
         "descriptipon" : "Espresso shots topped with cold water produce a light layer of crema, then served over ice. The result: a wonderfuly rich cup with depth and nuance.",
         "price" : 10.00,
-        "images" : ['https://i.ibb.co/dckf4LW/cafe-details.png','https://i.ibb.co/j5VfyBN/cafe-late.png'],
+        "whishlist" : false,
+        "images" : ['https://i.ibb.co/dckf4LW/cafe-details.png','https://www.pngall.com/wp-content/uploads/4/Starbucks-Coffee-Transparent.png'],
         "reviews" :  [
             {
                 "id" : 1,
@@ -22,9 +23,10 @@ export const products = [
     },
     {
         "id" : 2,
-        "name" : " Café Espressso",
+        "name" : "Café Espressso",
         "descriptipon" : "Espresso shots topped with cold water produce a light layer of crema, then served over ice. The result: a wonderfuly rich cup with depth and nuance.",
         "price" : 9.00,
+        "whishlist" : true, 
         "images" : ['https://i.ibb.co/dckf4LW/cafe-details.png','https://i.ibb.co/j5VfyBN/cafe-late.png'],
         "reviews" :  [
             {
@@ -43,10 +45,11 @@ export const products = [
     },
     {
         "id" : 3,
-        "name" : " Café Americano",
+        "name" : "Smoothie Fresh Detox",
         "descriptipon" : "Espresso shots topped with cold water produce a light layer of crema, then served over ice. The result: a wonderfuly rich cup with depth and nuance.",
         "price" : 9.00,
-        "images" : ['https://i.ibb.co/dckf4LW/cafe-details.png','https://i.ibb.co/j5VfyBN/cafe-late.png'],
+        "whishlist" : false,
+        "images" : ['https://i.ibb.co/dckf4LW/cafe-details.png','https://www.pngall.com/wp-content/uploads/4/Starbucks-Cup-PNG-Free-Image.png'],
         "reviews" :  [
             {
                 "id" : 1,

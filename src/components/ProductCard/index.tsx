@@ -1,31 +1,51 @@
 import React from "react";
-import { View, TouchableOpacity, Text, Image, StyleSheet } from "react-native";
-
+import { View, TouchableOpacity, Text, Image, StyleSheet, ImageProps, TouchableOpacityProps } from "react-native";
 import wish1 from '../../assets/wish1.png'
+import wish0 from '../../assets/wish0.png'
 import star from '../../assets/star.png'
-export default function ProductCard() {
+
+
+
+interface Product extends TouchableOpacityProps {
+    id : number,
+    name : string
+    descriptipon? : string,
+    price : number
+    images : string
+    whislist : boolean  
+    addToWhislist : () => void
+}
+
+
+
+
+export default function ProductCard({images, id, name, price, whislist, addToWhislist, ...props} : Product) {
+ 
     return (
-        <View style={styles.card}>
+        <TouchableOpacity style={styles.card} key={id} {...props}>
             <View style={styles.ratings}>
             <Image source={star} style={{ width: 15, height: 15 }} />
                 <Text style={styles.cardText}>
                     4.5
                 </Text>
-                <Image style={styles.img} source={{ uri: 'https://i.ibb.co/j5VfyBN/cafe-late.png' }} />
+                <Image style={styles.img} source={{ uri: images }} />
             </View>
             <View style={styles.cardesc}>
                 <View style={styles.desKWrapper}>
                     <View>
-                        <Text style={styles.descText}>Cafè Latte</Text>
-                        <Text style={styles.cardText}>R$ 30</Text>
+                        <Text style={styles.descText}>{name}</Text>
+                        <Text style={styles.cardText}>R$ {price}</Text>
                     </View>
 
-                    <TouchableOpacity style={styles.buttonFav}>
-                        <Image source={wish1} style={{ width: 20, height: 18 }} />
+                    <TouchableOpacity style={styles.buttonFav}  onPress={addToWhislist}>
+                        {whislist ? 
+                        <Image source={wish1} style={{ width: 20, height: 18 }} /> :
+                        <Image source={wish0} style={{ width: 20, height: 18 }} /> }
+                        
                     </TouchableOpacity>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
@@ -33,12 +53,16 @@ const styles = StyleSheet.create({
     card : {
         backgroundColor : "#225125",
         width : 200,
-        height :230,
+        height :250,
         marginTop: 60,
         borderRadius: 20,
         padding: 12,
-        marginRight : 36,
-        position : 'relative'
+        position : 'relative',
+        marginLeft : 40,
+        lastChild : {
+            marginLeft : 40,
+            marginRight : 40
+        }
     },
     ratings : {
         flexDirection : 'row',
@@ -48,10 +72,10 @@ const styles = StyleSheet.create({
     },
     img :{
         width : 207,
-        height: 207,
+        height : 210,
         position : 'absolute',
         top : -70,
-        left : 15 
+        left : 20
     },
     cardesc : {
         width : '100%',
@@ -90,8 +114,8 @@ const styles = StyleSheet.create({
     },
     buttonFav : {
         backgroundColor :"#fff",
-        width: 30,
-        height: 30,
+        width: 33,
+        height: 33,
         borderRadius : 100,
         justifyContent : 'center',
         alignItems : 'center',
